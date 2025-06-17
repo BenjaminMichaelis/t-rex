@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
     <LangVersion>latest</LangVersion>
@@ -8,9 +8,9 @@
 
     <Title>A library for parsing .trx files</Title>
     <Description>With t-rex, you can explore the results of your most recent test run. It discovers, parses, and displays the contents of .trx files.</Description>
-    <Authors>jonsequitur</Authors>
+    <Authors>jonsequitur, Benjamin Michaelis</Authors>
     <PackageTags>dotnet testing trx</PackageTags>
-    <RepositoryUrl>https://github.com/jonsequitur/t-rex</RepositoryUrl>
+    <RepositoryUrl>https://github.com/BenjaminMichaelis/t-rex</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>

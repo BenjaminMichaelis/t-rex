@@ -1,0 +1,69 @@
+<!-- 
+This file allow for customizing your build process.
+See: https://learn.microsoft.com/visualstudio/msbuild/customize-your-build
+-->
+<Project>
+  <!--
+  Uncomment if you need to enable inclusion of another Directory.Build.props file from a parent directory
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  -->
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <LangVersion>13.0</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <!-- 
+    If you you like to see source generated files saved to disk you can enable the following:
+    https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview
+    -->
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
+  </PropertyGroup>
+
+  <!-- Many of these properties can be found here: https://learn.microsoft.com/nuget/create-packages/package-authoring-best-practices#package-metadata -->
+  <PropertyGroup Label="NuGet Details">
+    <Title>TrxLib</Title>
+    <Authors>Benjamin Michaelis</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!-- The recommended size for the icon is 128x128: https://learn.microsoft.com/nuget/reference/msbuild-targets#packing-an-icon-image-file -->
+    <!--<PackageIcon>NuGetIcon.png</PackageIcon>-->
+  <PackageTags>visualstudio;playlist;test;vstest;unittest;dotnet;builder;parser</PackageTags>
+    <RepositoryUrl>https://github.com/BenjaminMichaelis/t-rex</RepositoryUrl>
+    <!-- If you project has a website set that value here; optionally this can also point to the repo -->
+    <PackageProjectUrl>https://github.com/BenjaminMichaelis/t-rex</PackageProjectUrl>
+    <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+    <!-- 
+    To produce a deterministic build, you will want to enable ContinuousIntegrationBuild as part of the pipeline build, but not for local development.
+    https://learn.microsoft.com/dotnet/core/project-sdk/msbuild-props#continuousintegrationbuild
+        https://learn.microsoft.com/dotnet/core/project-sdk/msbuild-props#continuousintegrationbuild.
+    The condition enables this property automatically when using Github Actions for the build, but can be removed if unused.
+    This can be enabled on the command line by including the following as part of the build.
+    dotnet build -p:ContinuousIntegrationBuild=true
+    If you want to use Azure Devops, change the `GITHUB_ACTIONS` to `TF_BUILD` in the Condition.
+    -->
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+  	  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+  <PropertyGroup Label="SourceLink">
+    <!--
+    You will also need to ensure that the appropriate Microsoft.SourceLink.* package is referenced.
+    https://github.com/dotnet/sourcelink
+    -->
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    
+    
+    <!--
+    These are optional, though typically recommended. See the docs for more details
+    https://github.com/dotnet/sourcelink
+    -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
+
+</Project>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\t-rex\t-rex.csproj" />
-    <ProjectReference Include="..\TRexLib\TRexLib.csproj" />
+    <ProjectReference Include="..\TRexLib\TrxLib.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="TRXs\1\example1_OSX.trx">
@@ -40,6 +40,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TRXs\complex.trx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TRXs\OneTestFailure.trx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TRXs\AllTestsPass.trx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

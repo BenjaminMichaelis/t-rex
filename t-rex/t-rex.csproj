@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TRexLib\TRexLib.csproj" />
+    <ProjectReference Include="..\TRexLib\TrxLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

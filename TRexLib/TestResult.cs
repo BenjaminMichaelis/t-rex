@@ -18,7 +18,8 @@ public class TestResult
         FileInfo codebase = null,
         string stackTrace = null,
         string errorMessage = null,
-        string stdOut = null)
+        string stdOut = null,
+        TestMethod testMethod = null)
     {
         FullyQualifiedTestName = fullyQualifiedTestName;
         Duration = duration;
@@ -31,6 +32,7 @@ public class TestResult
         StackTrace = stackTrace;
         ErrorMessage = errorMessage;
         StdOut = stdOut;
+        TestMethod = testMethod;
 
         var testNameParts = fullyQualifiedTestName.Split('.');
 
@@ -77,6 +79,8 @@ public class TestResult
     public string ErrorMessage { get; set; }
     public string StackTrace { get; }
     public string StdOut { get; set; }
+
+    public TestMethod TestMethod { get; }
 
     public override string ToString()
     {

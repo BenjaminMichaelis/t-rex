@@ -36,6 +36,14 @@ public static class TestOutputDocumentParser
                                   .Select(e => e.Value)
                                   .SingleOrDefault();
 
+            var unitTests = document
+                .Descendants()
+                .Where(e => e.Name.LocalName == "UnitTest")
+                .ToDictionary(
+                    e => e.Attribute("id")?.Value,
+                    e => e
+                );
+
             var testDefinitions = document
                                   .Descendants()
                                   .Where(e => e.Name.LocalName == "TestDefinitions")
@@ -89,6 +97,24 @@ public static class TestOutputDocumentParser
                                               ? attr.Value
                                               : default;
 
+                           // Find the UnitTest element for this result
+                           TestMethod testMethod = null;
+                           var testId = e.Attribute("testId")?.Value;
+                           if (testId != null && unitTests.TryGetValue(testId, out var unitTestElem))
+                           {
+                               var testMethodElem = unitTestElem.Elements().FirstOrDefault(x => x.Name.LocalName == "TestMethod");
+                               if (testMethodElem != null)
+                               {
+                                   testMethod = new TestMethod
+                                   {
+                                       CodeBase = testMethodElem.Attribute("codeBase")?.Value,
+                                       ClassName = testMethodElem.Attribute("className")?.Value,
+                                       Name = testMethodElem.Attribute("name")?.Value,
+                                       AdapterTypeName = testMethodElem.Attribute("adapterTypeName")?.Value
+                                   };
+                               }
+                           }
+
                            return new TestResult(
                                fullyQualifiedTestName: e.Attribute("testName")?.Value,
                                outcome: e.Attribute("outcome")
@@ -110,7 +136,8 @@ public static class TestOutputDocumentParser
                                codebase: codeBase,
                                stdOut: stdOut,
                                errorMessage: errorMessage,
-                               stackTrace: stacktrace);
+                               stackTrace: stacktrace,
+                               testMethod: testMethod);
                        })
                        .ToArray();
 

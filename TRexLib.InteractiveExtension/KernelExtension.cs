@@ -1,9 +1,5 @@
-﻿using System;
-using System.CommandLine;
-using System.IO;
-using System.Linq;
+﻿using System.CommandLine;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.DotNet.Interactive;
 using Microsoft.DotNet.Interactive.Formatting;
@@ -45,8 +41,8 @@ public class KernelExtension : IKernelExtension
         };
 
         runTestsCommand.SetHandler(
-            RunTests, 
-            projectArg, 
+            RunTests,
+            projectArg,
             Bind.FromServiceProvider<KernelInvocationContext>());
 
         return runTestsCommand;
@@ -65,8 +61,8 @@ public class KernelExtension : IKernelExtension
         };
 
         showTestsCommand.SetHandler(
-            ShowTests, 
-            dirArg, 
+            ShowTests,
+            dirArg,
             Bind.FromServiceProvider<KernelInvocationContext>());
 
         return showTestsCommand;
